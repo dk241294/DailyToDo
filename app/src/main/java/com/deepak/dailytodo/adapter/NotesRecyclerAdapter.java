@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdapter.ViewHolder> {
     //to hold notes
-  private   ArrayList<Note>notes=new ArrayList<>();
+    private ArrayList<Note> notes = new ArrayList<>();
 
     public NotesRecyclerAdapter(ArrayList<Note> notes) {
         this.notes = notes;
@@ -24,7 +24,7 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_note_list_item,parent,false)
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_note_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -41,11 +41,12 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title,timeStamp;
+        TextView title, timeStamp;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title=itemView.findViewById(R.id.note_title);
-            timeStamp=itemView.findViewById(R.id.note_timestamp);
+            title = itemView.findViewById(R.id.note_title);
+            timeStamp = itemView.findViewById(R.id.note_timestamp);
         }
     }
 }
