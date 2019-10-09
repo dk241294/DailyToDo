@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import com.deepak.dailytodo.adapter.NotesRecyclerAdapter;
 import com.deepak.dailytodo.models.Note;
+import com.deepak.dailytodo.util.NoteActivity;
 import com.deepak.dailytodo.util.VerticalSpacingItemDecorator;
 
 
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
     public void onNoteClick(int position) {
        // Intent intent=new Intent(getApplicationContext(),)
         Log.d(TAG, "onNoteClick: "+position);
+        Intent intent = new Intent(this, NoteActivity.class);
+        intent.putExtra("selected_note",mNotes.get(position));
+        startActivity(intent);
 
     }
 }
