@@ -1,6 +1,7 @@
 package com.deepak.dailytodo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerView();
         insertFakeNotes();
+        Toolbar toolbar =findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+       // toolbar.setTitle("Note");
+        setTitle("Note");
     }
 
     private void insertFakeNotes() {
