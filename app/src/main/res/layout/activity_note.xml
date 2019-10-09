@@ -14,18 +14,20 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <include layout="@layout/layout_note_toolbar"/>
 
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
+    <com.deepak.dailytodo.util.LineEditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/note_text"
         android:textSize="24sp"
-        android:textColor="@color/black"
-        android:padding="5dp"/>
+        android:textColor="#000"
+        android:padding="5dp"
+        android:gravity="top"/>
 
 </LinearLayout>
