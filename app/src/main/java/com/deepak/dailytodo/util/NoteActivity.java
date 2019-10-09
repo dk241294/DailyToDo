@@ -16,7 +16,7 @@ import com.deepak.dailytodo.R;
 import com.deepak.dailytodo.models.Note;
 
 public class NoteActivity extends AppCompatActivity implements View.OnTouchListener,
-        GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+        GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener, View.OnClickListener {
     private static final String TAG = "NoteActivity";
     private static final int EDIT_MODE_ENABLED = 1;
     private static final int EDIT_MODE_DISABLED = 0;
@@ -60,6 +60,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
     private void setListeners() {
         mGestureDetector = new GestureDetector(this, this);
         mLinedEditText.setOnTouchListener(this);
+        mCheck.setOnClickListener(this);
+        mViewTitle.setOnClickListener(this);
     }
 
     private boolean getIncomingIntent() {
@@ -157,5 +159,31 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.toolbar_check: {
+                disableEditMode();
+                break;
+            }
+            case R.id.note_text_title: {
+                enableEditMode();
+                mEditTitle.requestFocus();
+                mEditTitle.setSelection(mEditTitle.length());
+                break;
+            }
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mMode == EDIT_MODE_ENABLED) {
+            onClick(mCheck);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
