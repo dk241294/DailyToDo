@@ -2,6 +2,7 @@ package com.deepak.dailytodo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
         VerticalSpacingItemDecorator verticalSpacingItemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(verticalSpacingItemDecorator);
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
+        ItemTouchHelper itemTouchHelper =new ItemTouchHelper(itemTouchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
 
@@ -80,6 +83,21 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
     public void onClick(View v) {
         Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
-
     }
+    private void deleteNote(Note note) {
+        mNotes.remove(note);
+        mNoteRecyclerAdapter.notifyDataSetChanged();
+    }
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            deleteNote(mNotes.get(viewHolder.getAdapterPosition()));
+        }
+    };
+
 }
