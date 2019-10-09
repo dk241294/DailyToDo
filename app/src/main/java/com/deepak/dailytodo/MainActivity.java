@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -15,14 +16,16 @@ import com.deepak.dailytodo.adapter.NotesRecyclerAdapter;
 import com.deepak.dailytodo.models.Note;
 import com.deepak.dailytodo.util.NoteActivity;
 import com.deepak.dailytodo.util.VerticalSpacingItemDecorator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-public class MainActivity extends AppCompatActivity  implements NotesRecyclerAdapter.OnNoteListener {
+public class MainActivity extends AppCompatActivity  implements NotesRecyclerAdapter.OnNoteListener, View.OnClickListener {
     private static final String TAG = "MainActivity";
 
     private RecyclerView mRecyclerView;
     private ArrayList<Note> mNotes = new ArrayList<Note>();
     private NotesRecyclerAdapter mNoteRecyclerAdapter;
+    private FloatingActionButton fab;
 
 
     @Override
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recyclerView);
+        fab=findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
 
         initRecyclerView();
@@ -67,6 +72,13 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
         Log.d(TAG, "onNoteClick: "+position);
         Intent intent = new Intent(this, NoteActivity.class);
         intent.putExtra("selected_note",mNotes.get(position));
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
 
     }
