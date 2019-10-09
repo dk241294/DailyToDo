@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
         mNotes.remove(note);
         mNoteRecyclerAdapter.notifyDataSetChanged();
     }
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             return false;
@@ -99,5 +99,6 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
             deleteNote(mNotes.get(viewHolder.getAdapterPosition()));
         }
     };
+
 
 }

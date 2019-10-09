@@ -28,6 +28,7 @@
         android:textSize="24sp"
         android:textColor="#000"
         android:padding="5dp"
-        android:gravity="top"/>
+        android:gravity="top"
+        android:imeOptions="flagNoExtractUi"/>
 
 </LinearLayout>
