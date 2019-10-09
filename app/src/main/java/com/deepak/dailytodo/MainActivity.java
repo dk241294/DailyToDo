@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -14,7 +16,7 @@ import com.deepak.dailytodo.models.Note;
 import com.deepak.dailytodo.util.VerticalSpacingItemDecorator;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements NotesRecyclerAdapter.OnNoteListener {
     private static final String TAG = "MainActivity";
 
     private RecyclerView mRecyclerView;
@@ -51,11 +53,17 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes);
+        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes,this);
         VerticalSpacingItemDecorator verticalSpacingItemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(verticalSpacingItemDecorator);
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
     }
 
 
+    @Override
+    public void onNoteClick(int position) {
+       // Intent intent=new Intent(getApplicationContext(),)
+        Log.d(TAG, "onNoteClick: "+position);
+
+    }
 }
