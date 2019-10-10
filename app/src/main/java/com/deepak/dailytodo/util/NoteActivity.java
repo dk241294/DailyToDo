@@ -134,7 +134,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
         if (temp.length() > 0) {
             mFinalNote.setTitle(mEditTitle.getText().toString());
             mFinalNote.setContent(mLinedEditText.getText().toString());
-            String timeStamp = "oct 2019";
+            String timeStamp = TimeStamp.getCurrentTimeStamp();
             mFinalNote.setTimestamp(timeStamp);
             if (!mFinalNote.getContent().equals(mInitialNote.getContent()) || !mFinalNote.getTitle().equals(mInitialNote.getContent())) {
                 saveChanges();
