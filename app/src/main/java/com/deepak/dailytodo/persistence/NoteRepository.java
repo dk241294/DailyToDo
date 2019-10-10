@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.deepak.dailytodo.async.InsertAsyncTask;
 import com.deepak.dailytodo.models.Note;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class NoteRepository  {
     }
 
     public void insertNoteTask(Note note){
+        new InsertAsyncTask(mNoteDatabase.getNoteDao()).execute(note);
 
     }
 
