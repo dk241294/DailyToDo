@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
     private void deleteNote(Note note) {
         mNotes.remove(note);
         mNoteRecyclerAdapter.notifyDataSetChanged();
+        mNoteRepository.deleteNoteTask(note);
     }
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
         @Override
