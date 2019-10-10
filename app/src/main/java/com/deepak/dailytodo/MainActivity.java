@@ -24,7 +24,7 @@ import com.deepak.dailytodo.util.VerticalSpacingItemDecorator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-public class MainActivity extends AppCompatActivity  implements NotesRecyclerAdapter.OnNoteListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener, View.OnClickListener {
     private static final String TAG = "MainActivity";
 
     private RecyclerView mRecyclerView;
@@ -39,28 +39,29 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recyclerView);
-        fab=findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
-        mNoteRepository =new NoteRepository(this);
+        mNoteRepository = new NoteRepository(this);
 
 
         initRecyclerView();
         insertFakeNotes();
         retrieveNotes();
-        Toolbar toolbar =findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // toolbar.setTitle("Note");
+        // toolbar.setTitle("Note");
         setTitle("Note");
     }
+
     private void retrieveNotes() {
         mNoteRepository.retrieveNotesTask().observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
-                if(mNotes.size() > 0){
+                if (mNotes.size() > 0) {
                     mNotes.clear();
                 }
-                if(notes != null){
+                if (notes != null) {
                     mNotes.addAll(notes);
                 }
                 mNoteRecyclerAdapter.notifyDataSetChanged();
@@ -82,21 +83,21 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes,this);
+        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes, this);
         VerticalSpacingItemDecorator verticalSpacingItemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(verticalSpacingItemDecorator);
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
-        ItemTouchHelper itemTouchHelper =new ItemTouchHelper(itemTouchHelperCallback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
 
     @Override
     public void onNoteClick(int position) {
-       // Intent intent=new Intent(getApplicationContext(),)
-        Log.d(TAG, "onNoteClick: "+position);
+        // Intent intent=new Intent(getApplicationContext(),)
+        Log.d(TAG, "onNoteClick: " + position);
         Intent intent = new Intent(this, NoteActivity.class);
-        intent.putExtra("selected_note",mNotes.get(position));
+        intent.putExtra("selected_note", mNotes.get(position));
         startActivity(intent);
 
     }
@@ -106,12 +107,14 @@ public class MainActivity extends AppCompatActivity  implements NotesRecyclerAda
         Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
     }
+
     private void deleteNote(Note note) {
         mNotes.remove(note);
         mNoteRecyclerAdapter.notifyDataSetChanged();
         mNoteRepository.deleteNoteTask(note);
     }
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT) {
+
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             return false;

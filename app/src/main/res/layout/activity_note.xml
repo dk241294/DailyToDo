@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/lightYellow">
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,12 +15,12 @@
             android:layout_height="match_parent">
             <include layout="@layout/layout_note_toolbar"/>
 
-
-        </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.deepak.dailytodo.util.LineEditText
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/note_text"
@@ -29,6 +28,7 @@
         android:textColor="#000"
         android:padding="5dp"
         android:gravity="top"
-        android:imeOptions="flagNoExtractUi"/>
+        android:imeOptions="flagNoExtractUi"
+        android:background="@color/lightYellow"/>
 
 </LinearLayout>

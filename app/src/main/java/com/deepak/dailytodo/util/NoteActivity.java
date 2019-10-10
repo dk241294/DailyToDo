@@ -122,6 +122,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
         mMode = EDIT_MODE_ENABLED;
         enableContentInteraction();
     }
+   
 
     private void disableEditMode() {
         mBackArrowContainer.setVisibility(View.VISIBLE);
@@ -200,13 +201,15 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
+        enableEditMode();
+
         return false;
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
         Log.d(TAG, "onDoubleTap: double tapped.");
-        enableEditMode();
+
         return false;
     }
 
