@@ -21,31 +21,31 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
     private ArrayList<Note> mNotes = new ArrayList<>();
     private OnNoteListener onNoteListener;
 
-    public NotesRecyclerAdapter(ArrayList<Note> notes,OnNoteListener onNoteListener) {
+    public NotesRecyclerAdapter(ArrayList<Note> notes, OnNoteListener onNoteListener) {
         this.mNotes = notes;
-        this.onNoteListener=onNoteListener;
+        this.onNoteListener = onNoteListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_note_list_item, parent, false);
-        return new ViewHolder(view,onNoteListener);
+        return new ViewHolder(view, onNoteListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        try{
+        try {
             //String date=mNotes.get(position).getTimestamp().substring(1);
             String month = mNotes.get(position).getTimestamp().substring(0, 2);
             month = TimeStamp.getMonthFromNumber(month);
             String year = mNotes.get(position).getTimestamp().substring(3);
-            String timestamp = " "+ month + " " + year;
+            String timestamp = " " + month + " " + year;
             holder.timeStamp.setText(timestamp);
             holder.title.setText(mNotes.get(position).getTitle());
-        }catch (NullPointerException e){
-            Log.e(TAG, "onBindViewHolder: Null Pointer: " + e.getMessage() );
+        } catch (NullPointerException e) {
+            Log.e(TAG, "onBindViewHolder: Null Pointer: " + e.getMessage());
         }
     }
 
@@ -59,12 +59,12 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         TextView title, timeStamp;
         OnNoteListener onNoteListener;
 
-        public ViewHolder(@NonNull View itemView,OnNoteListener onNoteListener) {
+        public ViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
 
             title = itemView.findViewById(R.id.note_title);
             timeStamp = itemView.findViewById(R.id.note_timestamp);
-            this.onNoteListener=onNoteListener;
+            this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
         }
 
@@ -74,7 +74,8 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
 
         }
     }
-    public interface OnNoteListener{
+
+    public interface OnNoteListener {
         void onNoteClick(int position);
     }
 }
